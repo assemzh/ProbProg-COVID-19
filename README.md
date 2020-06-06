@@ -3,8 +3,8 @@
 Project aims to simulate COVID-19 virus spread across the globe using Probabilistic Programming.
 
 Data:
-https://github.com/owid/covid-19-data/tree/master/public/data
-https://pypi.org/project/covid-daily/
+* https://github.com/owid/covid-19-data/tree/master/public/data
+* https://pypi.org/project/covid-daily/
 
 STEPS:
 
