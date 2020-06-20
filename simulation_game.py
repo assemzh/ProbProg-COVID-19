@@ -109,7 +109,6 @@ def evaluate(inf, rec, d, policy):
   rec_point = 100
 
   result = sum(inf)*inf_point + sum(rec)*rec_point + sum(d)*dd_point + sum(policy)
-  print(result)
   return result
 
 
@@ -123,23 +122,23 @@ def evaluate(inf, rec, d, policy):
 ##print(evaluate(inf, rec, d, policy))
 
 
-def model():
+def model(guess):
 ##    def forward(self):
-        h1 = pyro.sample("h1",dist.Normal(0.5, 0.25))
-        h2 = pyro.sample("h2",dist.Normal(0.5, 0.25))
-        h3 = pyro.sample("h3",dist.Normal(0.5, 0.25))
+        h1 = pyro.sample("h1",dist.Normal(guess["h1"], 0.25))
+        h2 = pyro.sample("h2",dist.Normal(guess["h2"], 0.25))
+        h3 = pyro.sample("h3",dist.Normal(guess["h3"], 0.25))
 
-        d1 = pyro.sample("d1",dist.Normal(0.5, 0.25))
-        d2 = pyro.sample("d2",dist.Normal(0.5, 0.25))
-        d3 = pyro.sample("d3",dist.Normal(0.5, 0.25))
+        d1 = pyro.sample("d1",dist.Normal(guess["d1"], 0.25))
+        d2 = pyro.sample("d2",dist.Normal(guess["d2"], 0.25))
+        d3 = pyro.sample("d3",dist.Normal(guess["d3"], 0.25))
         
-        l1 = pyro.sample("l1",dist.Normal(0.5, 0.25))
-        l2 = pyro.sample("l2",dist.Normal(0.5, 0.25))
-        l3 = pyro.sample("l3",dist.Normal(0.5, 0.25))
+        l1 = pyro.sample("l1",dist.Normal(guess["l1"], 0.25))
+        l2 = pyro.sample("l2",dist.Normal(guess["l2"], 0.25))
+        l3 = pyro.sample("l3",dist.Normal(guess["l3"], 0.25))
         
-        q1 = pyro.sample("q1",dist.Normal(0.5, 0.25))
-        q2 = pyro.sample("q2",dist.Normal(0.5, 0.25))
-        q3 = pyro.sample("q3",dist.Normal(0.5, 0.25))
+        q1 = pyro.sample("q1",dist.Normal(guess["q1"], 0.25))
+        q2 = pyro.sample("q2",dist.Normal(guess["q2"], 0.25))
+        q3 = pyro.sample("q3",dist.Normal(guess["q3"], 0.25))
         
         hygiene_list = [h1]*30 + [h2]*30 + [h3]*30
         distancing_list = [d1]*30 + [d2]*30 + [d3]*30
@@ -155,7 +154,7 @@ def model():
 ##        obs = pyro.sample("obs", dist.Normal(point, 10000), obs=torch.tensor(0.))
         
 ##        return h1,h1,h3,d1,d2,d3,l1,l2,l3,q1,q2,q3
-        return pyro.sample("obs", dist.Normal(point, 10000), obs=torch.tensor(0.))
+        return pyro.sample("obs", dist.Normal(point, 10000))
 import argparse
 import logging
 
@@ -170,33 +169,47 @@ logging.basicConfig(format='%(message)s', level=logging.INFO)
 pyro.enable_validation(__debug__)
 pyro.set_rng_seed(0)
 
-def conditioned_model(model):
-    return poutine.condition(model, data={"obs": 0})
+def scale(guess):
+    return model(guess)
+conditioned_scale = pyro.condition(scale, data={"obs": torch.tensor(0.)})
+from pyro.infer.mcmc import MCMC
+from pyro.infer.mcmc.nuts import HMC
+from pyro.infer import EmpiricalMarginal
+import matplotlib.pyplot as plt
+# %matplotlib inline
+guess_prior = {"h1": 0.5, "h2": 0.5, "h3": 0.5, "d1": 0.5, "d2": 0.5, "d3": 0.5, "l1": 0.5, "l2": 0.5, "l3": 0.5, "q1": 0.5, "q2": 0.5, "q3": 0.5}
+hmc_kernel = HMC(conditioned_scale, step_size=0.9, num_steps=4)
+posterior = MCMC(hmc_kernel, 
+                 num_samples=400, 
+                 warmup_steps=50).run(guess_prior)
+mcmc.summary()
+# def conditioned_model(model):
+#     return poutine.condition(model, data={"obs": 0})
 
 
-def main(args):
-    nuts_kernel = NUTS(conditioned_model, jit_compile=args.jit)
-    mcmc = MCMC(nuts_kernel,
-                num_samples=args.num_samples,
-                warmup_steps=args.warmup_steps,
-                num_chains=args.num_chains)
-    mcmc.run(model)
-    mcmc.summary()
+# def main(args):
+#     nuts_kernel = NUTS(conditioned_model, jit_compile=args.jit)
+#     mcmc = MCMC(nuts_kernel,
+#                 num_samples=args.num_samples,
+#                 warmup_steps=args.warmup_steps,
+#                 num_chains=args.num_chains)
+#     mcmc.run(model)
+#     mcmc.summary()
 
 
-if __name__ == '__main__':
-##    assert pyro.__version__.startswith('1.3.0')
-    parser = argparse.ArgumentParser(description='COVID GAME MCMC')
-    parser.add_argument('--num-samples', type=int, default=1000,
-                        help='number of MCMC samples (default: 1000)')
-    parser.add_argument('--num-chains', type=int, default=1,
-                        help='number of parallel MCMC chains (default: 1)')
-    parser.add_argument('--warmup-steps', type=int, default=1000,
-                        help='number of MCMC samples for warmup (default: 1000)')
-    parser.add_argument('--jit', action='store_true', default=False)
-    args = parser.parse_args()
+# if __name__ == '__main__':
+# ##    assert pyro.__version__.startswith('1.3.0')
+#     parser = argparse.ArgumentParser(description='COVID GAME MCMC')
+#     parser.add_argument('--num-samples', type=int, default=1000,
+#                         help='number of MCMC samples (default: 1000)')
+#     parser.add_argument('--num-chains', type=int, default=1,
+#                         help='number of parallel MCMC chains (default: 1)')
+#     parser.add_argument('--warmup-steps', type=int, default=1000,
+#                         help='number of MCMC samples for warmup (default: 1000)')
+#     parser.add_argument('--jit', action='store_true', default=False)
+#     args = parser.parse_args()
 
-    main(args)
+#     main(args)
 
 
 ##for i in result:
