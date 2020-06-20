@@ -182,7 +182,7 @@ hmc_kernel = HMC(conditioned_scale, step_size=0.9, num_steps=4)
 posterior = MCMC(hmc_kernel, 
                  num_samples=400, 
                  warmup_steps=50).run(guess_prior)
-mcmc.summary()
+posterior.summary()
 # def conditioned_model(model):
 #     return poutine.condition(model, data={"obs": 0})
 
