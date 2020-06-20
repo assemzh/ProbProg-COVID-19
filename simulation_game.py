@@ -1,4 +1,9 @@
 import matplotlib.pyplot as plt
+import pyro
+import pyro.distributions as dist
+from pyro.nn import PyroModule, PyroSample
+import torch
+
 test_cap = 0.001
 hygiene = 1- 1.72/2.11    #parameters to be infered
 distancing = 0.7 # US/Italy after lockdown
@@ -103,17 +108,96 @@ def evaluate(inf, rec, d, policy):
   inf_point = -100
   rec_point = 100
 
-  return sum(inf)*inf_point + sum(rec)*rec_point + sum(d)*dd_point + sum(policy)
+  result = sum(inf)*inf_point + sum(rec)*rec_point + sum(d)*dd_point + sum(policy)
+  print(result)
+  return result
 
 
-hygiene_list = [1]*10
-distancing_list = [0]*10
-lockdown_list = [0,0,0,1,1,1,0,0,0,0]
-quarantine_list = [0,0,1,0,0,0,0,0,0,0]
-days = 10
+##hygiene_list = [1]*10
+##distancing_list = [0]*10
+##lockdown_list = [0,0,0,1,1,1,0,0,0,0]
+##quarantine_list = [0,0,1,0,0,0,0,0,0,0]
+##days = 10
+##
+##susc, exp, inf, rec, d, re, policy = virus_model(hygiene_list, distancing_list,lockdown_list,quarantine_list)
+##print(evaluate(inf, rec, d, policy))
 
-susc, exp, inf, rec, d, re, policy = virus_model(hygiene_list, distancing_list,lockdown_list,quarantine_list)
-print(evaluate(inf, rec, d, policy))
+
+def model():
+##    def forward(self):
+        h1 = pyro.sample("h1",dist.Normal(0.5, 0.25))
+        h2 = pyro.sample("h2",dist.Normal(0.5, 0.25))
+        h3 = pyro.sample("h3",dist.Normal(0.5, 0.25))
+
+        d1 = pyro.sample("d1",dist.Normal(0.5, 0.25))
+        d2 = pyro.sample("d2",dist.Normal(0.5, 0.25))
+        d3 = pyro.sample("d3",dist.Normal(0.5, 0.25))
+        
+        l1 = pyro.sample("l1",dist.Normal(0.5, 0.25))
+        l2 = pyro.sample("l2",dist.Normal(0.5, 0.25))
+        l3 = pyro.sample("l3",dist.Normal(0.5, 0.25))
+        
+        q1 = pyro.sample("q1",dist.Normal(0.5, 0.25))
+        q2 = pyro.sample("q2",dist.Normal(0.5, 0.25))
+        q3 = pyro.sample("q3",dist.Normal(0.5, 0.25))
+        
+        hygiene_list = [h1]*30 + [h2]*30 + [h3]*30
+        distancing_list = [d1]*30 + [d2]*30 + [d3]*30
+        lockdown_list = [l1]*30 + [l2]*30 + [l3]*30
+        quarantine_list = [q1]*30 + [q2]*30 + [q3]*30
+
+        susc, exp, inf, rec, d, re, policy = virus_model(hygiene_list, distancing_list,lockdown_list,quarantine_list)
+        
+        point = evaluate(inf, rec, d, policy)
+
+##        print(point)
+
+##        obs = pyro.sample("obs", dist.Normal(point, 10000), obs=torch.tensor(0.))
+        
+##        return h1,h1,h3,d1,d2,d3,l1,l2,l3,q1,q2,q3
+        return pyro.sample("obs", dist.Normal(point, 10000), obs=torch.tensor(0.))
+import argparse
+import logging
+
+import torch
+
+import pyro
+import pyro.distributions as dist
+import pyro.poutine as poutine
+from pyro.infer import MCMC, NUTS
+
+logging.basicConfig(format='%(message)s', level=logging.INFO)
+pyro.enable_validation(__debug__)
+pyro.set_rng_seed(0)
+
+def conditioned_model(model):
+    return poutine.condition(model, data={"obs": 0})
+
+
+def main(args):
+    nuts_kernel = NUTS(conditioned_model, jit_compile=args.jit)
+    mcmc = MCMC(nuts_kernel,
+                num_samples=args.num_samples,
+                warmup_steps=args.warmup_steps,
+                num_chains=args.num_chains)
+    mcmc.run(model)
+    mcmc.summary()
+
+
+if __name__ == '__main__':
+##    assert pyro.__version__.startswith('1.3.0')
+    parser = argparse.ArgumentParser(description='COVID GAME MCMC')
+    parser.add_argument('--num-samples', type=int, default=1000,
+                        help='number of MCMC samples (default: 1000)')
+    parser.add_argument('--num-chains', type=int, default=1,
+                        help='number of parallel MCMC chains (default: 1)')
+    parser.add_argument('--warmup-steps', type=int, default=1000,
+                        help='number of MCMC samples for warmup (default: 1000)')
+    parser.add_argument('--jit', action='store_true', default=False)
+    args = parser.parse_args()
+
+    main(args)
+
 
 ##for i in result:
 ## print(i)
