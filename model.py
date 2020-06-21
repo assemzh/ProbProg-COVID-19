@@ -11,8 +11,8 @@ exposed_days = 3.59
 recovery_days = 16.92 
 # waning_days = 365
 
-susceptible0 = 0.99999
-infected0 = 0.00001
+susceptible0 = 0.9999
+infected0 = 0.0001
 exposed0 = 0
 recovered0 = 0
 
