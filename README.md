@@ -4,8 +4,7 @@ Project aims to simulate COVID-19 virus spread across the globe using Probabilis
 
 Data:
 * https://www.kaggle.com/imdevskp/corona-virus-report?select=full_grouped.csv&fbclid=IwAR3ZDw5Kc9lo9kbIiw63fyrvSdV1CPSnQUbFAVXgKx9jIIxm6nWce5DFRs0 
-* https://github.com/owid/covid-19-data/tree/master/public/data
-* https://pypi.org/project/covid-daily/
+
 
 STEPS:
 
@@ -17,4 +16,4 @@ STEPS:
 
 - Create virtual world with 'best' policies
 
-- BONUS: Create a game to play
+- BONUS: Create a simulation game with imaginary world
