@@ -8,12 +8,10 @@ Data:
 
 STEPS:
 
-- Get the infection and fatality data during pandemic
+- Get the virus statistic by Virus-model
 
-- Create model for virus spread
+- Infer statistics on how policies affect the virus spread by Change-pont model
 
-- Infer statistics on how policies affect the virus spread
-
-- Create virtual world with 'best' policies
+- Create model for virus spread: Ganarative model (SEIRD)
 
 - BONUS: Create a simulation game with imaginary world
