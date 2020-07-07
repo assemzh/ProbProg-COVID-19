@@ -8,10 +8,10 @@ Data:
 
 STEPS:
 
-- Get the virus statistic by Virus-model
+- Get the virus statistic by the Virus-model
 
-- Infer statistics on how policies affect the virus spread by Change-pont model
+- Infer statistics on how policies affect the virus spread by the Change-point model
 
-- Create model for virus spread: Ganarative model (SEIRD)
+- Create model for virus spread: Generative model (SEIRD)
 
 - BONUS: Create a simulation game with imaginary world
