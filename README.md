@@ -15,3 +15,5 @@ STEPS:
 - Create model for virus spread: Generative model (SEIRD)
 
 - BONUS: Create a simulation game with imaginary world
+
+Medium blog post: https://medium.com/@zhunis.assem/am-i-safe-from-covid-19-51f95d2f073b
