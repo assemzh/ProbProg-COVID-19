@@ -8,7 +8,7 @@ import dill
 
 test_cap = 0.001
 hygiene = 0.18    #parameters to be infered
-distancing = 0.6 # US/Italy after lockdown
+distancing = 0.6 # Canada
 lockdown = 0.96
 quarantine = 0.76 # Korea
 
@@ -18,8 +18,8 @@ exposed_days = 3.59
 recovery_days = 16.92 
 # waning_days = 365
 
-susceptible0 = 0.999
-infected0 = 0.001
+susceptible0 = 0.99
+infected0 = 0.01
 exposed0 = 0
 recovered0 = 0
 
@@ -36,7 +36,7 @@ def virus_model(hygiene_list, distancing_list,lockdown_list,quarantine_list):
   transmission_rate0 = (1/ transmission_days)
   incubation_rate = (1/  exposed_days)
   recovery_rate = (1/ recovery_days)
-  death_rate_with_med = 0.01
+  death_rate_with_med = 0.02
   death_rate_without_med = 0.9
   ser_case_rate = 0.15
 
@@ -73,7 +73,7 @@ def virus_model(hygiene_list, distancing_list,lockdown_list,quarantine_list):
     dst_point = - population * 0.1 * 10 /365
   
     policy_point = hg_point * hygiene_list[day] + dst_point * distancing_list[day] + ld_point*lockdown_list[day] + qr_point*quarantine_list[day]
-    susceptible = susceptible + susceptible * infected * transmission_rate 
+    susceptible = susceptible - susceptible * infected * transmission_rate 
     exposed = exposed + susceptible * infected * transmission_rate
     exposed = exposed - exposed * incubation_rate
 
@@ -113,8 +113,7 @@ def evaluate(inf, rec, d, policy):
   result = sum(inf)*inf_point + d[-1]*dd_point + sum(policy)
   return result
 
-
-from torch.distributions import constraints
+# from torch.distributions import constraints
 
 result = np.zeros((3,3,3,3,3,3,3,3,3,3,3,3), dtype = float)
 for index, value in np.ndenumerate(result):
@@ -130,6 +129,7 @@ print(result[0,0,0,0,0,0,0,0,0,0,0,0])
 loss = np.max(result)
 arg =  np.unravel_index(result.argmax(), result.shape)
 print(loss, arg)
+
 # def model():
 #         h1 = pyro.sample("h1",dist.Normal(0.5, 0.25))
 #         h2 = pyro.sample("h2",dist.Normal(0.5, 0.25))
@@ -227,23 +227,3 @@ print(loss, arg)
 #     if i % 500 == 0:
 #         logging.info("Elbo loss: {}".format(elbo))
 
-
-plt.plot(m, result[0], label="line S")
-plt.plot()
-plt.show()
-
-plt.plot(m, result[1], label="line E")
-plt.plot()
-plt.show()
-
-plt.plot(m, result[2], label="line I")
-plt.plot()
-plt.show()
-
-plt.plot(m, result[3], label="line R")
-plt.plot()
-plt.show()
-
-plt.plot(m, result[4], label="line D")
-plt.plot()
-plt.show()
