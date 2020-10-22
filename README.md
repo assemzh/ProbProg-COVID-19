@@ -4,17 +4,16 @@ Project aims to simulate COVID-19 virus spread across the globe using Probabilis
 
 Data:
 * https://www.kaggle.com/imdevskp/corona-virus-report?select=full_grouped.csv&fbclid=IwAR3ZDw5Kc9lo9kbIiw63fyrvSdV1CPSnQUbFAVXgKx9jIIxm6nWce5DFRs0 
-* https://github.com/owid/covid-19-data/tree/master/public/data
-* https://pypi.org/project/covid-daily/
+
 
 STEPS:
 
-- Get the infection and fatality data during pandemic
+- Get the virus statistic by the Virus-model
 
-- Create model for virus spread
+- Infer statistics on how policies affect the virus spread by the Change-point model
 
-- Infer statistics on how policies affect the virus spread
+- Create model for virus spread: Generative model (SEIRD)
 
-- Create virtual world with 'best' policies
+- BONUS: Create a simulation game with imaginary world
 
-- BONUS: Create a game to play
+Medium blog post: https://medium.com/@zhunis.assem/am-i-safe-from-covid-19-51f95d2f073b
