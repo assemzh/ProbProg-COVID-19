@@ -8,9 +8,9 @@ Data:
 
 STEPS:
 
-1. Get the virus statistic by the Virus-model --> 
+1. Get the virus statistic by the Virus-model --> virus_model.ipynb
 
-2. Infer statistics on how policies affect the virus spread by the Change-point model
+2. Infer statistics on how policies affect the virus spread by the Change-point model. --> changing_point.ipynb
 
 3. Create model for virus spread: Generative model (SEIRD) --> Simulation_and_Policy.ipynb
 
