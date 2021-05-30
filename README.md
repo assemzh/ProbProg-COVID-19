@@ -26,8 +26,8 @@ To see all experiments, please, refer to the Experiments folder
 ![image](https://user-images.githubusercontent.com/50063452/120111036-381e2480-c1ab-11eb-9d74-68994bdee294.png)
 
 
-|  Policy combination  |  Cases | Deaths |    Loss    |
-|:--------------------:|:------:|:------:|:----------:|
+|  Policy combination  |  Cases | Deaths |    Loss (billion $)    |
+|:--------------------:|:------:|:------:|:----------------------:|
 |     MT \| T \| T     |  10734 |   577  |  4.538101  |
 |      T \| T \| T     |  11003 |   591  |  4.579994  |
 |      L \| L \| L     |  11003 |   591  |  4.932606  |
