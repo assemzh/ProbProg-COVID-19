@@ -6,19 +6,28 @@ The COVID-19 pandemic left its unique mark on the 21st century as one of the mos
 * https://www.kaggle.com/imdevskp/corona-virus-report?select=full_grouped.csv&fbclid=IwAR3ZDw5Kc9lo9kbIiw63fyrvSdV1CPSnQUbFAVXgKx9jIIxm6nWce5DFRs0 
 * https://git.io/Jvoxz
 
-STEPS:
+# Pipeline:
 
-1. Get the virus statistic by Compartmental Model  (SEIRD) --> virus_model.ipynb
+<img src="https://user-images.githubusercontent.com/50063452/120110974-e9708a80-c1aa-11eb-9be5-9177e590d02f.png" width = "400" height = "400">
 
-2. Infer statistics on how policies affect the virus spread by the Change-point model. --> changing_point.ipynb
+1. Get the virus statistic by Compartmental Model  (SEIRD) --> Compartmental_model.ipynb
+
+2. Infer statistics on how policies affect the virus spread by the Change-point model. --> Changing_point_model.ipynb
 
 3. Simulation with artifitial country by Generative model --> Policy_cost.ipynb
+
+To see all experiments, please, refer to the Experiments folder
 
 
 # Results:
 
-|  Policy combination  |  Cases | Deaths |    Loss    |
-|:--------------------:|:------:|:------:|:----------:|
+![image](https://user-images.githubusercontent.com/50063452/120111026-2b013580-c1ab-11eb-87f0-bd749d922ec4.png)
+
+![image](https://user-images.githubusercontent.com/50063452/120111036-381e2480-c1ab-11eb-9d74-68994bdee294.png)
+
+
+|  Policy combination  |  Cases | Deaths |    Loss (billion $)    |
+|:--------------------:|:------:|:------:|:----------------------:|
 |     MT \| T \| T     |  10734 |   577  |  4.538101  |
 |      T \| T \| T     |  11003 |   591  |  4.579994  |
 |      L \| L \| L     |  11003 |   591  |  4.932606  |
