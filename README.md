@@ -8,7 +8,7 @@ The COVID-19 pandemic left its unique mark on the 21st century as one of the mos
 
 # Pipeline:
 
-![pipeline](https://user-images.githubusercontent.com/50063452/120110974-e9708a80-c1aa-11eb-9be5-9177e590d02f.png)
+![pipeline](https://user-images.githubusercontent.com/50063452/120110974-e9708a80-c1aa-11eb-9be5-9177e590d02f.png) {width:200px}
 
 
 1. Get the virus statistic by Compartmental Model  (SEIRD) --> virus_model.ipynb
