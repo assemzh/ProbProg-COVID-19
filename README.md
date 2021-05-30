@@ -10,9 +10,9 @@ The COVID-19 pandemic left its unique mark on the 21st century as one of the mos
 
 <img src="https://user-images.githubusercontent.com/50063452/120110974-e9708a80-c1aa-11eb-9be5-9177e590d02f.png" width = "400" height = "400">
 
-1. Get the virus statistic by Compartmental Model  (SEIRD) --> virus_model.ipynb
+1. Get the virus statistic by Compartmental Model  (SEIRD) --> Compartmental_model.ipynb
 
-2. Infer statistics on how policies affect the virus spread by the Change-point model. --> changing_point.ipynb
+2. Infer statistics on how policies affect the virus spread by the Change-point model. --> Changing_point_model.ipynb
 
 3. Simulation with artifitial country by Generative model --> Policy_cost.ipynb
 
