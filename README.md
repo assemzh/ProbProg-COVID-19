@@ -6,7 +6,10 @@ The COVID-19 pandemic left its unique mark on the 21st century as one of the mos
 * https://www.kaggle.com/imdevskp/corona-virus-report?select=full_grouped.csv&fbclid=IwAR3ZDw5Kc9lo9kbIiw63fyrvSdV1CPSnQUbFAVXgKx9jIIxm6nWce5DFRs0 
 * https://git.io/Jvoxz
 
-STEPS:
+# Pipeline:
+
+![pipeline](https://user-images.githubusercontent.com/50063452/120110974-e9708a80-c1aa-11eb-9be5-9177e590d02f.png)
+
 
 1. Get the virus statistic by Compartmental Model  (SEIRD) --> virus_model.ipynb
 
@@ -14,8 +17,15 @@ STEPS:
 
 3. Simulation with artifitial country by Generative model --> Policy_cost.ipynb
 
+To see all experiments, please, refer to the Experiments folder
+
 
 # Results:
+
+![image](https://user-images.githubusercontent.com/50063452/120111026-2b013580-c1ab-11eb-87f0-bd749d922ec4.png)
+
+![image](https://user-images.githubusercontent.com/50063452/120111036-381e2480-c1ab-11eb-9d74-68994bdee294.png)
+
 
 |  Policy combination  |  Cases | Deaths |    Loss    |
 |:--------------------:|:------:|:------:|:----------:|
