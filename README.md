@@ -16,6 +16,7 @@ The COVID-19 pandemic left its unique mark on the 21st century as one of the mos
 
 3. Simulation with artifitial country by Generative model --> Policy_cost.ipynb
 
+You can input your own country's parameters.
 To see all experiments, please, refer to the Experiments folder
 
 
