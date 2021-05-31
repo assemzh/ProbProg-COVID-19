@@ -94,3 +94,7 @@ Table represents loss regarding applied policies. The most effective policy comb
 *   M/m: Masks and Hygiene
 
 *Example: L | l | D denotes the consecutive policy execution of full lockdown (1st month), half lockdown (2nd month) and full distancing (3rd month).*
+
+Code references: We adapt some of our code from these sources:
+https://nbviewer.jupyter.org/github/jramkiss/jramkiss.github.io/blob/master/_posts/notebooks/covid19-changes.ipynb
+https://docs.pyro.ai/en/dev/_modules/pyro/contrib/epidemiology/models.html#SimpleSEIRModel
