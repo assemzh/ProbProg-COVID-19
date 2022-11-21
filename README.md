@@ -1,6 +1,6 @@
 # ProbProg-COVID-19
 
-Codes for the [Response to COVID-19 with Probabilistic Programming](https://arxiv.org/abs/2106.00192)
+Codes for the [Response to COVID-19 with Probabilistic Programming](https://www.frontiersin.org/articles/10.3389/fpubh.2022.953472/full)
 
 The COVID-19 pandemic left its unique mark on the 21st century as one of the most significant disasters in history, triggering governments all over the world to respond with a wide range of interventions. However, these restrictions come with a substantial price tag. It is crucial for governments to form anti-virus strategies that balance the trade-off between protecting public health and minimizing the economic cost. This work proposes a probabilistic programming method to quantify the efficiency of major non-pharmaceutical interventions. We present a generative simulation model that accounts for the economic and human capital cost of adopting such strategies, and provide an end-to-end pipeline to simulate the virus spread and the incurred loss of various policy combinations. By investigating the national response in 10 countries covering four continents, we found that social distancing coupled with contact tracing is the most successful policy, reducing the virus transmission rate by 96\%. We also investigate the recent vaccination efforts and found that widespread vaccination successfully mitigates the virus spread.
 
@@ -102,3 +102,14 @@ Table represents loss regarding applied policies. The most effective policy comb
 We adapt some of our code from these sources:
 https://nbviewer.jupyter.org/github/jramkiss/jramkiss.github.io/blob/master/_posts/notebooks/covid19-changes.ipynb
 https://docs.pyro.ai/en/dev/_modules/pyro/contrib/epidemiology/models.html#SimpleSEIRModel
+
+## Citation
+If you find this code useful, please cite the [original paper](https://www.frontiersin.org/articles/10.3389/fpubh.2022.953472/full):
+```LaTeX
+@article{zhunis2022responses,
+  title={Responses to COVID-19 with probabilistic programming},
+  author={Assem Zhunis and Tung-Duong Mai and Sundong Kim},
+  journal = {Frontiers in Public Health},
+  year = {2022}
+}
+```
