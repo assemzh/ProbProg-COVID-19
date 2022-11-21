@@ -1,6 +1,6 @@
 # ProbProg-COVID-19
 
-Codes for the [Response to COVID-19 with Probabilistic Programming](https://www.frontiersin.org/articles/10.3389/fpubh.2022.953472/full)
+Codes for the Frontiers paper: [Response to COVID-19 with Probabilistic Programming](https://www.frontiersin.org/articles/10.3389/fpubh.2022.953472/full)
 
 The COVID-19 pandemic left its unique mark on the 21st century as one of the most significant disasters in history, triggering governments all over the world to respond with a wide range of interventions. However, these restrictions come with a substantial price tag. It is crucial for governments to form anti-virus strategies that balance the trade-off between protecting public health and minimizing the economic cost. This work proposes a probabilistic programming method to quantify the efficiency of major non-pharmaceutical interventions. We present a generative simulation model that accounts for the economic and human capital cost of adopting such strategies, and provide an end-to-end pipeline to simulate the virus spread and the incurred loss of various policy combinations. By investigating the national response in 10 countries covering four continents, we found that social distancing coupled with contact tracing is the most successful policy, reducing the virus transmission rate by 96\%. We also investigate the recent vaccination efforts and found that widespread vaccination successfully mitigates the virus spread.
 
